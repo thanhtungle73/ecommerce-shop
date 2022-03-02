@@ -19,21 +19,28 @@ function Header() {
                     <Grid container>
                         <Grid item lg={12}>
                             <Toolbar>
-                                <Box sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'flex-start',
-                                    flexGrow: 1,
-                                }}>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'flex-start',
+                                        flexGrow: 1,
+                                    }}>
                                     <Typography
                                         variant="h6"
                                         noWrap
                                         component="div"
                                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                                     >
-                                        <Link href='#'
-                                            sx={{ '& img': { display: 'block', height: '90px' } }}>
-                                            <img src={HEADER_LOGO_URL} alt="logo" />
+                                        <Link
+                                            href='#'
+                                            sx={{ '& img': { display: 'block', padding: '4px' } }}
+                                        >
+                                            <img
+                                                src={HEADER_LOGO_URL}
+                                                alt="logo"
+                                                height="74px"
+                                            />
                                         </Link>
                                     </Typography>
 
@@ -55,8 +62,10 @@ function Header() {
                                 <Box
                                     sx={{ display: { xs: 'none', md: 'flex', color: theme.palette.common.black } }}
                                 >
-                                    <IconButton size="large"
-                                        aria-label="show 4 new mails" color="inherit"
+                                    <IconButton
+                                        size="large"
+                                        aria-label="show 4 new mails"
+                                        color="inherit"
                                     >
                                         <SearchOutlinedIcon />
                                     </IconButton>
@@ -71,7 +80,8 @@ function Header() {
                                         </Badge>
                                     </IconButton>
 
-                                    <Button color="inherit"
+                                    <Button
+                                        color="inherit"
                                         sx={{ textTransform: 'none', fontSize: '1rem' }}
                                     >
                                         Login
