@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { Controller } from 'react-hook-form';
 
 InputField.propTypes = {
@@ -10,7 +10,7 @@ InputField.propTypes = {
 };
 
 function InputField(props) {
-    const { form, label, name } = props;
+    const { form, label, name, parentSX } = props;
     const { control } = form;
 
     return (
@@ -21,6 +21,7 @@ function InputField(props) {
                 <TextField
                     label=''
                     variant="outlined"
+                    fullWidth
                     placeholder={label}
                     helperText={error?.message}
                     error={invalid}
@@ -29,6 +30,8 @@ function InputField(props) {
                     onBlur={onBlur}
                     value={value}
                     name={name}
+                    size="small"
+                    sx={{ ...parentSX }}
                 />
             )}
         />

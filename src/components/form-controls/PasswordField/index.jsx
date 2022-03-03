@@ -1,18 +1,22 @@
+import { useTheme } from '@emotion/react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { FormControl, FormHelperText, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material';
+import { Box, FormControl, FormHelperText, IconButton, InputAdornment, OutlinedInput, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
+
 
 PasswordField.propTypes = {
     form: PropTypes.object,
     name: PropTypes.string,
     label: PropTypes.string,
+    parentSX: PropTypes.object,
 };
 
 function PasswordField(props) {
-    const { form, name, label } = props;
+    const { form, name, label, parentSX = {} } = props;
     const { control } = form;
+    const theme = useTheme();
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -24,9 +28,19 @@ function PasswordField(props) {
             name={name}
             control={control}
             render={({ field: { onChange, onBlur, value, name }, fieldState: { invalid, error } }) => (
-                <>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <Typography>{label}</Typography>
+                <Box
+                    component="div"
+                    sx={{
+                        mb: theme.spacing(2),
+                        fontSize: 'inherit'
+                    }}>
+                    <FormControl
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        sx={{ ...parentSX }}
+                    >
+                        <Typography mb={1} sx={{ fontSize: 'inherit', fontWeight: '500' }}>{label}</Typography>
 
                         <OutlinedInput
                             id={name}
@@ -40,8 +54,9 @@ function PasswordField(props) {
                                         aria-label="toggle password visibility"
                                         onClick={handleClickShowPassword}
                                         edge="end"
+                                        size="small"
                                     >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                                     </IconButton>
                                 </InputAdornment>
                             }
@@ -49,11 +64,11 @@ function PasswordField(props) {
                             value={value}
                             onChange={onChange}
                             onBlur={onBlur}
-                            placeholder={label}
+                            placeholder="********"
                         />
                     </ FormControl>
                     <FormHelperText error={invalid}>{error?.message}</FormHelperText>
-                </>
+                </Box>
             )}
         />
     );
