@@ -31,7 +31,28 @@ function InputField(props) {
                     value={value}
                     name={name}
                     size="small"
-                    sx={{ ...parentSX }}
+                    sx={
+                        {
+                            '& label.Mui-focused': {
+                                color: 'black',
+                            },
+                            '& .MuiInput-underline:after': {
+                                borderBottomColor: 'black',
+                            },
+                            '& .MuiOutlinedInput-root': {
+                                '&:hover fieldset': {
+                                    borderColor: 'black',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'black',
+                                },
+                            },
+                            '& div': { height: '42px' },
+                            '& input': {
+                                fontSize: '0.875rem'
+                            }
+                        }
+                    }
                 />
             )}
         />

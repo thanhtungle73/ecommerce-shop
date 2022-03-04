@@ -38,14 +38,34 @@ function PasswordField(props) {
                         variant="outlined"
                         fullWidth
                         size="small"
-                        sx={{ ...parentSX }}
+                        sx={
+                            {
+                                '& label.Mui-focused': {
+                                    color: 'black',
+                                },
+                                '& .MuiInput-underline:after': {
+                                    borderBottomColor: 'black',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '&:hover fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                },
+                                '& div': { height: '42px' },
+                                '& input': {
+                                    fontSize: '0.875rem'
+                                }
+                            }
+                        }
                     >
                         <Typography mb={1} sx={{ fontSize: 'inherit', fontWeight: '500' }}>{label}</Typography>
 
                         <OutlinedInput
                             id={name}
                             error={invalid}
-                            helperText={error?.message}
                             label=''
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
