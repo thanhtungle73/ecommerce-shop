@@ -76,7 +76,7 @@ function PasswordField(props) {
                                         edge="end"
                                         size="small"
                                     >
-                                        {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                                        {showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
                                     </IconButton>
                                 </InputAdornment>
                             }

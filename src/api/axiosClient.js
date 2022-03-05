@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 // Create an axios instance with a custom config
 const axiosClient = axios.create({
-  baseURL: "https://some-domain.com/api/",
-  headers: { "Content-Type": "application/json" },
+  baseURL: 'https://ecommerce-json-server.herokuapp.com/',
+  headers: { 'Content-Type': 'application/json' },
 });
 
 // Interceptors
