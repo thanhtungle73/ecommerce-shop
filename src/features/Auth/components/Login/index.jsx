@@ -6,26 +6,26 @@ import LoginForm from '../LoginForm';
 import PropTypes from 'prop-types';
 
 Login.propTypes = {
-    handleClose: PropTypes.func,
+  handleClose: PropTypes.func,
 };
 
 function Login({ closeDialog = null }) {
-    const dispatch = useDispatch();
-    const handleFormSubmit = async (values) => {
-        try {
-            const resultAction = await dispatch(login(values));
-            console.log(values);
-            if (closeDialog) closeDialog();
-        } catch (error) {
-            console.log('Failed to login by: ', error)
-        }
-    };
+  const dispatch = useDispatch();
+  const handleFormSubmit = async (values) => {
+    try {
+      const resultAction = await dispatch(login(values));
 
-    return (
-        <div>
-            <LoginForm formSubmit={handleFormSubmit} />
-        </div>
-    );
+      if (closeDialog) closeDialog();
+    } catch (error) {
+      console.log('Failed to login by: ', error);
+    }
+  };
+
+  return (
+    <div>
+      <LoginForm formSubmit={handleFormSubmit} />
+    </div>
+  );
 }
 
 export default Login;

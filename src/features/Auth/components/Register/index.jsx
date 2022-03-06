@@ -10,7 +10,7 @@ function Register({ closeDialog = null }) {
   const dispatch = useDispatch();
   const handleFormSubmit = async (values) => {
     try {
-      dispatch(register(values));
+      const resultAction = await dispatch(register(values));
 
       if (closeDialog) closeDialog();
     } catch (error) {

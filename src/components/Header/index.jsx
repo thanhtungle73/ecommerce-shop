@@ -41,6 +41,7 @@ function Header() {
 
   const handleClickOpen = () => {
     setOpenDialog(true);
+    setMode(MODE.LOGIN);
   };
 
   const handleClose = () => {

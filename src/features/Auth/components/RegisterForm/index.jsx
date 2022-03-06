@@ -1,7 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
-import { Box, Button, Checkbox, Divider, Typography, useTheme } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import {
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  Divider,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import InputField from 'components/form-controls/InputField';
 import PasswordField from 'components/form-controls/PasswordField';
@@ -43,6 +52,8 @@ function RegisterForm({ formSubmit }) {
     resolver: yupResolver(schema),
   });
 
+  const { isSubmitting } = form.formState;
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ color: AUTH_TEXT_COLOR, fontSize: '0.75rem' }}>
@@ -64,30 +75,38 @@ function RegisterForm({ formSubmit }) {
               </Typography>
               <InputField name="fullName" label="Ralph Adwards" form={form} />
             </Box>
+
             <Box mb={1.5}>
               <Typography variant="body2" mb={1} fontSize="inherit" fontWeight="500">
                 Email
               </Typography>
               <InputField name="email" label="Example@mail.com" form={form} />
             </Box>
+
             <PasswordField name="password" label="Password" form={form} />
             <PasswordField name="retypePassword" label="Retype Password" form={form} />
 
             <Button
               type="submit"
               fullWidth
+              disabled={isSubmitting}
               sx={{
                 height: theme.spacing(5.25),
                 mb: theme.spacing(3),
                 color: theme.palette.common.white,
                 bgcolor: theme.palette.grey[900],
                 textTransform: 'none',
-                '&:hover': {
-                  bgcolor: theme.palette.common.black,
+                '&:hover': { bgcolor: theme.palette.common.black },
+                '&:disabled': {
+                  bgcolor: theme.palette.grey[600],
+                  color: theme.palette.common.white,
                 },
               }}
             >
-              Create Account
+              {isSubmitting && (
+                <CircularProgress size={24} thickness={4.5} color="inherit" sx={{ mr: 1 }} />
+              )}
+              {isSubmitting ? 'Creating Account' : 'Create Account'}
             </Button>
 
             <Divider variant="fullWidth">OR</Divider>

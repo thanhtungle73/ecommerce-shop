@@ -1,7 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
-import { Box, Button, Divider, Typography, useTheme } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Box, Button, CircularProgress, Divider, Typography, useTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import InputField from 'components/form-controls/InputField';
 import PasswordField from 'components/form-controls/PasswordField';
@@ -36,6 +37,8 @@ function LoginForm({ formSubmit }) {
     resolver: yupResolver(schema),
   });
 
+  const { isSubmitting } = form.formState;
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ color: AUTH_TEXT_COLOR, fontSize: '0.75rem' }}>
@@ -60,22 +63,28 @@ function LoginForm({ formSubmit }) {
 
             <PasswordField name="password" label="Password" form={form} />
 
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
+              disabled={isSubmitting}
               sx={{
                 height: theme.spacing(5.25),
                 mb: theme.spacing(3),
                 color: theme.palette.common.white,
                 bgcolor: theme.palette.grey[900],
                 textTransform: 'none',
-                '&:hover': {
-                  bgcolor: theme.palette.common.black,
+                '&:hover': { bgcolor: theme.palette.common.black },
+                '&:disabled': {
+                  bgcolor: theme.palette.grey[600],
+                  color: theme.palette.common.white,
                 },
               }}
             >
-              Login
-            </Button>
+              {isSubmitting && (
+                <CircularProgress size={24} thickness={4.5} color="inherit" sx={{ mr: 1 }} />
+              )}
+              {isSubmitting ? 'Logging In' : 'Login'}
+            </LoadingButton>
 
             <Divider variant="fullWidth">OR</Divider>
 
