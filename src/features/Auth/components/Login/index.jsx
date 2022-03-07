@@ -1,9 +1,8 @@
-import { unwrapResult } from '@reduxjs/toolkit';
 import { login } from 'features/Auth/userSlice';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import LoginForm from '../LoginForm';
-import PropTypes from 'prop-types';
 
 Login.propTypes = {
   handleClose: PropTypes.func,

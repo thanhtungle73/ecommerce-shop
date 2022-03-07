@@ -10,7 +10,7 @@ InputField.propTypes = {
 };
 
 function InputField(props) {
-  const { form, label, name, parentSX } = props;
+  const { form, label, name } = props;
   const { control } = form;
 
   return (

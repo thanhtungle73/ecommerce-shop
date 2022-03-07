@@ -33,7 +33,8 @@ function Header() {
   const loggedInUser = useSelector((state) => state.user.current);
   const dispatch = useDispatch();
 
-  const isLoggedIn = !!loggedInUser.email;
+  const isLoggedIn = !!loggedInUser;
+  console.log(isLoggedIn);
   const pages = ['Home', 'Shop', 'Blog', 'About Us', 'Contact'];
   const [openDialog, setOpenDialog] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
@@ -49,16 +50,19 @@ function Header() {
   };
 
   const handleUserClick = (event) => {
-    setAnchorEl(event.target);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
-  const handleLogoutClick = () => {
-    dispatch(logout());
+  const handleLogoutClick = async () => {
+    setAnchorEl(null);
+
+    await dispatch(logout());
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: theme.palette.grey[50] }}>
@@ -158,13 +162,17 @@ function Header() {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
+        MenuListProps={{ 'aria-labelledby': 'basic-button' }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+        <MenuItem onClick={handleClose} sx={{ fontSize: '0.875rem' }}>
+          Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose} sx={{ fontSize: '0.875rem' }}>
+          My account
+        </MenuItem>
+        <MenuItem onClick={handleLogoutClick} sx={{ fontSize: '0.875rem' }}>
+          Logout
+        </MenuItem>
       </Menu>
 
       <Dialog open={openDialog} onClose={handleClose} disableEscapeKeyDown>

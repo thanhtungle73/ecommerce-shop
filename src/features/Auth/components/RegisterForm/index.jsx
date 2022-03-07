@@ -1,22 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
-import { LoadingButton } from '@mui/lab';
-import {
-  Box,
-  Button,
-  Checkbox,
-  CircularProgress,
-  Divider,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Box, Button, CircularProgress, Divider, Typography, useTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import InputField from 'components/form-controls/InputField';
 import PasswordField from 'components/form-controls/PasswordField';
 import { AUTH_TEXT_COLOR } from 'constants';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 

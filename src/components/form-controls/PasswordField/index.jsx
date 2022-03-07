@@ -21,7 +21,7 @@ PasswordField.propTypes = {
 };
 
 function PasswordField(props) {
-  const { form, name, label, parentSX = {} } = props;
+  const { form, name, label } = props;
   const { control } = form;
   const theme = useTheme();
 

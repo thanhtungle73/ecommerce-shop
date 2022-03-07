@@ -14,7 +14,7 @@ function Register({ closeDialog = null }) {
 
       if (closeDialog) closeDialog();
     } catch (error) {
-      console.log('Failed to register by: ', error);
+      console.log('Failed to register by: ', error.message);
     }
   };
   return (
