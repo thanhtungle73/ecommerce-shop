@@ -1,20 +1,35 @@
+import { StorageKeys } from 'constants';
+import { auth } from 'firebase-config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useSnackbar } from 'notistack';
 import React from 'react';
-import PropTypes from 'prop-types';
-import RegisterForm from '../RegisterForm';
 import { useDispatch } from 'react-redux';
-import { register } from 'features/Auth/userSlice';
+import RegisterForm from '../RegisterForm';
 
 Register.propTypes = {};
 
 function Register({ closeDialog = null }) {
-  const dispatch = useDispatch();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  // Register user and save to localStorage.
   const handleFormSubmit = async (values) => {
     try {
-      const resultAction = await dispatch(register(values));
+      const { email, password } = values;
+      const registerUser = await createUserWithEmailAndPassword(auth, email, password);
+
+      enqueueSnackbar('Registration is successfully.', {
+        variant: 'success',
+      });
+      localStorage.setItem(StorageKeys.TOKEN, registerUser.user.accessToken);
+      localStorage.setItem(StorageKeys.USER, JSON.stringify(registerUser.user.email));
 
       if (closeDialog) closeDialog();
     } catch (error) {
-      console.log('Failed to register by: ', error.message);
+      console.log('Failed to register by: ', error);
+
+      enqueueSnackbar(`${error.code}`, {
+        variant: 'error',
+      });
     }
   };
   return (

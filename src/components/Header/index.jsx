@@ -21,24 +21,43 @@ import {
 import { HEADER_LOGO_URL, MODE, TEXT_COLOR } from 'constants';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
-import { logout } from 'features/Auth/userSlice';
+import { logout, setUserInfo } from 'features/Auth/userSlice';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from 'firebase-config';
+import { StorageKeys } from 'constants';
 
 Header.propTypes = {};
 
 function Header() {
   const theme = createTheme();
-  const loggedInUser = useSelector((state) => state.user.current);
   const dispatch = useDispatch();
 
-  const isLoggedIn = !!loggedInUser;
-  console.log(isLoggedIn);
   const pages = ['Home', 'Shop', 'Blog', 'About Us', 'Contact'];
   const [openDialog, setOpenDialog] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const unregisterAuthObserver = onAuthStateChanged(
+    auth,
+    async (currentUser) => {
+      setIsLoggedIn(Boolean(currentUser));
+      if (!currentUser) {
+        // User logs out, handle something here
+        console.log('User is not logged in');
+        return;
+      }
+
+      // User is logged in
+      console.log('Logged in user');
+
+      return () => unregisterAuthObserver();
+    },
+    []
+  );
 
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -57,10 +76,14 @@ function Header() {
     setAnchorEl(null);
   };
 
+  // handle sign out click and remove localStorage.
   const handleLogoutClick = async () => {
     setAnchorEl(null);
 
-    await dispatch(logout());
+    await signOut(auth);
+
+    localStorage.removeItem(StorageKeys.TOKEN);
+    localStorage.removeItem(StorageKeys.USER);
   };
 
   return (
