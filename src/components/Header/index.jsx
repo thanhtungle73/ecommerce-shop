@@ -1,7 +1,7 @@
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import {
   AppBar,
   Badge,
@@ -148,7 +148,7 @@ function Header() {
 
                   <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                     <Badge badgeContent={17} color="warning">
-                      <ShoppingCartOutlinedIcon />
+                      <ShoppingBagOutlinedIcon />
                     </Badge>
                   </IconButton>
 
