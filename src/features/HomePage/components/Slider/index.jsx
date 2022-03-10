@@ -12,7 +12,7 @@ Slider.propTypes = {
 function Slider({ data, timeOut = null }) {
   const [activeSlice, setActiveSlice] = useState(0);
   const [isLeftClick, setIsLeftClick] = useState(false);
-  const timeOutAuto = timeOut || 3000;
+  const timeOutAuto = timeOut || 5000;
 
   // Increase index when click next.
   const nextSlide = () => {
@@ -48,6 +48,7 @@ function Slider({ data, timeOut = null }) {
           item={item}
           isLeftClick={isLeftClick}
           active={activeSlice === index}
+          index={index}
         />
       ))}
 
