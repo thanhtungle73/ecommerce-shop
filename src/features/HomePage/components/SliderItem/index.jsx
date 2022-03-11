@@ -1,8 +1,8 @@
-import { Box, Button, IconButton, Slide, Typography, useTheme } from '@mui/material';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Box, Button, Grow, Slide, Typography, useTheme } from '@mui/material';
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 SliderItem.propTypes = {
   item: PropTypes.object,
@@ -11,73 +11,88 @@ SliderItem.propTypes = {
   index: PropTypes.number,
 };
 
-function SliderItem({ item = {}, isLeftClick, active, index }) {
+function SliderItem({ item = {}, index }) {
   const theme = useTheme();
   const [slideIcon, setSliceIcon] = useState(false);
+  const containerRef = useRef(null);
+
+  // Set slide in duration time.
   return (
-    <Slide direction={isLeftClick ? 'right' : 'left'} in={active} timeout={900}>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <Box
         sx={{
-          display: active ? 'block' : 'none',
-          width: '100%',
-          height: '100%',
+          position: 'absolute',
+          top: '50%',
+          left: (() => index !== 2 && '10%')(),
+          right: '12%',
+          transform: 'translateY(-50%)',
+          maxWidth: '500px',
+          p: 4,
+          color: theme.palette.grey[900],
+          textAlign: 'center',
         }}
       >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: (() => index !== 2 && '10%')(),
-            right: '14%',
-            transform: 'translateY(-50%)',
-            maxWidth: '500px',
-            p: 4,
-            color: theme.palette.grey[900],
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant="h3" sx={{ fontWeight: '600', textTransform: 'uppercase' }}>
-            {item.title}
-          </Typography>
-          <Typography variant="body1" mt={2} sx={{ color: theme.palette.text.secondary }}>
-            {item.description}
-          </Typography>
+        <Typography variant="h3" sx={{ fontWeight: '600', textTransform: 'uppercase' }}>
+          {item.title}
+        </Typography>
+        <Typography variant="body1" mt={2} sx={{ color: theme.palette.text.secondary }}>
+          {item.description}
+        </Typography>
 
-          <Box mt={2} sx={{ '& a': { textDecoration: 'none' } }}>
-            <Link to={item.path}>
-              <Button
-                variant="contained"
-                onMouseOver={() => setSliceIcon(true)}
-                onMouseLeave={() => setSliceIcon(false)}
-                sx={{
-                  bgcolor: theme.palette.common.black,
-                  minWidth: '108px',
-                  overflow: 'hidden',
-                  '&:hover': { bgcolor: theme.palette.grey[800] },
-                }}
-              >
-                {slideIcon && (
-                  <Slide direction="right" in={slideIcon}>
-                    <ShoppingCartOutlinedIcon sx={{ mr: 1 }} />
-                  </Slide>
-                )}
-                {!slideIcon && 'Shop Now'}
-              </Button>
-            </Link>
-          </Box>
+        <Box mt={2} sx={{ '& a': { textDecoration: 'none' } }}>
+          <Link to={item.path}>
+            <Button
+              variant="contained"
+              onMouseOver={() => setSliceIcon(true)}
+              onMouseLeave={() => setSliceIcon(false)}
+              ref={containerRef}
+              sx={{
+                minWidth: '116px',
+                minHeight: '37px',
+                overflowX: 'hidden',
+                bgcolor: theme.palette.grey[900],
+                '&:hover': { bgcolor: theme.palette.common.black },
+              }}
+            >
+              {slideIcon && (
+                <Slide direction="right" in={slideIcon} container={containerRef.current}>
+                  <ShoppingCartOutlinedIcon sx={{ mr: 1 }} />
+                </Slide>
+              )}
+
+              {!slideIcon && (
+                <Slide direction="left" in={!slideIcon} container={containerRef.current}>
+                  <Typography
+                    variant="subtitle2"
+                    fontSize="1rem"
+                    sx={{ color: theme.palette.common.white }}
+                  >
+                    Shop Now
+                  </Typography>
+                </Slide>
+              )}
+            </Button>
+          </Link>
         </Box>
-
-        <Box
-          component="div"
-          style={{
-            width: '100%',
-            height: '100%',
-            background: `url(${item.imgUrl}) no-repeat top/cover`,
-            pt: '43vw',
-          }}
-        ></Box>
       </Box>
-    </Slide>
+
+      <Box
+        component="img"
+        src={item.imgUrl}
+        alt="slider-img"
+        style={{
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      ></Box>
+    </Box>
   );
 }
 

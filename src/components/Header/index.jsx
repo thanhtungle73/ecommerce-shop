@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
@@ -18,22 +19,17 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { HEADER_LOGO_URL, MODE, TEXT_COLOR } from 'constants';
+import { HEADER_LOGO_URL, MODE, StorageKeys, TEXT_COLOR } from 'constants';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
-import { logout, setUserInfo } from 'features/Auth/userSlice';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from 'firebase-config';
-import { StorageKeys } from 'constants';
 
 Header.propTypes = {};
 
 function Header() {
   const theme = createTheme();
-  const dispatch = useDispatch();
 
   const pages = ['Home', 'Shop', 'Blog', 'About Us', 'Contact'];
   const [openDialog, setOpenDialog] = useState(false);

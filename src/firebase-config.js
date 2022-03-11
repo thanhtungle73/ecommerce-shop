@@ -6,7 +6,6 @@ const firebaseConfig = {
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: 'ltt-ecommerce-shop',
   storageBucket: 'ltt-ecommerce-shop.appspot.com',
-  messagingSenderId: '914193338599',
   appId: '1:914193338599:web:67cd2ed22ca7275eff9242',
 };
 

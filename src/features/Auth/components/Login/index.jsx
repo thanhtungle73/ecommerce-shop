@@ -1,10 +1,10 @@
-import { auth } from 'firebase-config';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import React from 'react';
 import LoginForm from '../LoginForm';
 import { useSnackbar } from 'notistack';
 import { StorageKeys } from 'constants';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from 'firebase-config';
 
 Login.propTypes = {
   handleClose: PropTypes.func,

@@ -3,7 +3,6 @@ import { auth } from 'firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import RegisterForm from '../RegisterForm';
 
 Register.propTypes = {};
