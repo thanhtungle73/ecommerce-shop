@@ -1,5 +1,5 @@
 import Header from 'components/Header';
-import HomePageFeature from 'features/HomePage';
+import HomePage from 'features/Home/pages/HomePage';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -10,7 +10,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
-        <Route path="/home" element={<HomePageFeature />} />
+        <Route path="/home" element={<HomePage />} />
       </Routes>
     </div>
   );

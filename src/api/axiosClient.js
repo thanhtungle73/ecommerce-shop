@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance with a custom config
 const axiosClient = axios.create({
-  baseURL: 'https://ecommerce-json-server.herokuapp.com/',
+  baseURL: 'https://ecommerce-json-server.herokuapp.com/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
