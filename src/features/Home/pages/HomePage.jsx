@@ -1,6 +1,7 @@
 import categoryApi from 'api/categoryApi';
 import sliderApi from 'api/sliderApi';
 import React, { useEffect, useState } from 'react';
+import Banner from '../components/Banner';
 import Category from '../components/Category';
 import Slider from '../components/Slider';
 
@@ -42,6 +43,7 @@ function HomePage() {
     <div>
       <Slider slidersData={slidersData} loading={loading}></Slider>
       <Category categories={categoryData} loading={categoryLoading} />
+      <Banner />
     </div>
   );
 }

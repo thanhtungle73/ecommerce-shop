@@ -2,6 +2,7 @@ import { Box, Button, Container, Grid, Skeleton, Typography, useTheme } from '@m
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ArrowRightAltRoundedIcon from '@mui/icons-material/ArrowRightAltRounded';
 
 Category.propTypes = {
   categories: PropTypes.array,
@@ -55,7 +56,7 @@ function Category({ categories = [], loading = true }) {
                       sx={{
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        alignItems: 'flex-start',
+                        alignItems: 'center',
                         flexFlow: 'column',
                         position: 'absolute',
                         width: '100%',
@@ -63,7 +64,7 @@ function Category({ categories = [], loading = true }) {
                         zIndex: 1,
                         borderRadius: '2px',
                         backgroundImage:
-                          'linear-gradient(45deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0))',
+                          'linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0))',
                         '&:hover': { backgroundImage: 'none' },
                       }}
                     >
@@ -81,11 +82,12 @@ function Category({ categories = [], loading = true }) {
                           size="small"
                           sx={{
                             color: theme.palette.grey[100],
-                            bgcolor: theme.palette.action.disabled,
+                            bgcolor: theme.palette.action.hover,
                             '&:hover': { bgcolor: theme.palette.common.black },
                           }}
                         >
                           Go to shop
+                          <ArrowRightAltRoundedIcon />
                         </Button>
                       </Box>
                     </Box>
