@@ -85,7 +85,7 @@ function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: theme.palette.grey[50] }}>
-        <Container>
+        <Container maxWidth="xl">
           <Grid container>
             <Grid item lg={12}>
               <Toolbar>

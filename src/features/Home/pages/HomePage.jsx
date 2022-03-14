@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Banner from '../components/Banner';
 import Category from '../components/Category';
 import Slider from '../components/Slider';
+import NewProduct from '../components/NewProduct';
 
 HomePage.propTypes = {};
 
@@ -44,6 +45,7 @@ function HomePage() {
       <Slider slidersData={slidersData} loading={loading}></Slider>
       <Category categories={categoryData} loading={categoryLoading} />
       <Banner />
+      <NewProduct />
     </div>
   );
 }
