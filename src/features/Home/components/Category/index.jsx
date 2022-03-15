@@ -11,15 +11,15 @@ Category.propTypes = {
 function Category({ categories = [], loading = true }) {
   const theme = useTheme();
   return (
-    <Box mt={4}>
+    <Box mt={8}>
       <Container maxWidth="xl">
         <Grid container>
           <Grid item lg={12}>
             {loading ? (
               <Skeleton variant="text" width={250} height={32} />
             ) : (
-              <Typography component="h2" variant="h5" mb={2} fontWeight={500}>
-                Our Popular Categories
+              <Typography component="h2" variant="h4" mb={6} textAlign="center" fontWeight="500">
+                Our popular categories
               </Typography>
             )}
           </Grid>
@@ -43,10 +43,10 @@ function Category({ categories = [], loading = true }) {
                     width: '100%',
                     height: '100%',
                     overflow: 'hidden',
-                    borderRadius: '2px',
+                    borderRadius: '4px',
                     '&:hover img': {
                       cursor: 'pointer',
-                      transform: 'scale(1.1)',
+                      transform: 'scale(1.05)',
                     },
                   }}
                 >
@@ -89,7 +89,7 @@ function Category({ categories = [], loading = true }) {
                         display: 'block',
                         width: '100%',
                         height: '100%',
-                        borderRadius: '2px',
+                        borderRadius: '4px',
                         transition: 'transform 0.5s ease',
                       }}
                     />

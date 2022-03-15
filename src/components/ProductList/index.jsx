@@ -8,14 +8,14 @@ ProductList.propTypes = {};
 
 function ProductList(props) {
   return (
-    <Box mt={4}>
+    <Box mt={6}>
       <Container maxWidth="xl">
-        <Grid container lg={3} sm={6} xs={6}>
-          <Grid item>
-            {products.map((product, index) => {
-              <Product key={index} product={product} />;
-            })}
-          </Grid>
+        <Grid container spacing={2}>
+          {products.map((product, index) => (
+            <Grid item key={index} lg={3} sm={6} xs={6}>
+              <Product product={product} />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>

@@ -7,17 +7,17 @@ NewProduct.propTypes = {};
 
 function NewProduct(props) {
   return (
-    <Box mt={4}>
+    <Box mt={8}>
       <Container maxWidth="xl">
         <Grid container>
-          <Grid item>
-            <Typography variant="h5" fontWeight="500">
-              New Arrivals
+          <Grid item lg={12}>
+            <Typography variant="h4" textAlign="center" fontWeight="500">
+              New arrivals
             </Typography>
           </Grid>
         </Grid>
-        <ProductList />
       </Container>
+      <ProductList />
     </Box>
   );
 }

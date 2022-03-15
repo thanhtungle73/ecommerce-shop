@@ -107,7 +107,7 @@ function Header() {
                       <img
                         src={HEADER_LOGO_URL}
                         alt="logo"
-                        height="70px"
+                        height="60px"
                         style={{ display: 'block' }}
                       />
                     </Link>
@@ -122,10 +122,10 @@ function Header() {
                       >
                         <Button
                           sx={{
-                            my: 2,
+                            my: 1,
                             display: 'block',
                             textTransform: 'none',
-                            fontSize: '1rem',
+                            fontSize: '0.875rem',
                             fontWeight: 400,
                             color: 'inherit',
                           }}
@@ -138,11 +138,11 @@ function Header() {
                 </Box>
 
                 <Box sx={{ display: { xs: 'none', md: 'flex', color: TEXT_COLOR } }}>
-                  <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                  <IconButton size="medium" aria-label="show 4 new mails" color="inherit">
                     <SearchOutlinedIcon />
                   </IconButton>
 
-                  <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+                  <IconButton size="medium" aria-label="show 17 new notifications" color="inherit">
                     <Badge badgeContent={17} color="warning">
                       <ShoppingBagOutlinedIcon />
                     </Badge>
@@ -151,7 +151,7 @@ function Header() {
                   {!isLoggedIn && (
                     <Button
                       color="inherit"
-                      sx={{ textTransform: 'none', fontSize: '1rem' }}
+                      sx={{ textTransform: 'none', fontSize: '0.875rem' }}
                       onClick={handleClickOpen}
                     >
                       Login
@@ -162,7 +162,7 @@ function Header() {
                     <IconButton
                       color="inherit"
                       onClick={handleUserClick}
-                      size="large"
+                      size="medium"
                       aria-label="account of current user"
                       aria-controls="menu-appbar"
                       aria-haspopup="true"
