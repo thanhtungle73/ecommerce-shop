@@ -18,7 +18,13 @@ function Category({ categories = [], loading = true }) {
             {loading ? (
               <Skeleton variant="text" width={250} height={32} />
             ) : (
-              <Typography component="h2" variant="h4" mb={6} textAlign="center" fontWeight="500">
+              <Typography
+                component="h2"
+                variant="h5"
+                mb={6}
+                textAlign="center"
+                textTransform="uppercase"
+              >
                 Our popular categories
               </Typography>
             )}

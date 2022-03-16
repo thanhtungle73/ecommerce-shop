@@ -11,7 +11,7 @@ function NewProduct(props) {
       <Container maxWidth="xl">
         <Grid container>
           <Grid item lg={12}>
-            <Typography variant="h4" textAlign="center" fontWeight="500">
+            <Typography variant="h5" textAlign="center" textTransform="uppercase">
               New arrivals
             </Typography>
           </Grid>

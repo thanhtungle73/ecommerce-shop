@@ -1,7 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Fade, Grow, Tooltip, Typography, useTheme } from '@mui/material';
+import { products } from 'assets/fake-products';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import { AUTH_TEXT_COLOR, IMG_PLACEHOLDER_URL, SALE_PRICE_COLOR } from 'constants';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from 'utils';
 
@@ -11,18 +15,171 @@ Product.propTypes = {
 
 function Product({ product = {} }) {
   const navigate = useNavigate();
-  const thumbnailUrl = product.thumbnailUrls[0] || IMG_PLACEHOLDER_URL;
+  const theme = useTheme();
+  const [productActions, setProductActions] = useState(false);
+  const primaryThumbnailUrl = product.thumbnailUrls[0] || IMG_PLACEHOLDER_URL;
+  const secondaryThumbnailUrl = product.thumbnailUrls[1] || IMG_PLACEHOLDER_URL;
 
   // Navigate to details page.
   const handleProductClick = () => {
     navigate(`/products/${product.id}`);
   };
 
-  return (
-    <Box sx={{ cursor: 'pointer' }} onClick={handleProductClick}>
-      <Box component="img" src={thumbnailUrl} width="100%" height="100%" />
+  const handleProductMouseOver = () => {
+    setProductActions(true);
+  };
 
-      <Box mt={1}>
+  const handleProductMouseLeave = () => {
+    setProductActions(false);
+  };
+
+  return (
+    <Box
+      sx={{ cursor: 'pointer' }}
+      onClick={handleProductClick}
+      onMouseOver={handleProductMouseOver}
+      onMouseLeave={handleProductMouseLeave}
+    >
+      <Box sx={{ position: 'relative' }}>
+        <Box
+          sx={{
+            position: 'relative',
+            float: 'left',
+            overflow: 'hidden',
+            height: '100%',
+            '&:hover img:nth-child(1)': { opacity: 0 },
+            '&:hover img:nth-child(2)': { opacity: 1 },
+          }}
+        >
+          <Box
+            component="img"
+            src={primaryThumbnailUrl}
+            width="100%"
+            height="100%"
+            sx={{
+              position: 'absolute',
+              zIndex: 2,
+              transition: '0.4s',
+            }}
+          />
+          <Box
+            component="img"
+            src={secondaryThumbnailUrl}
+            width="100%"
+            height="100%"
+            sx={{ transition: '0.4s' }}
+          />
+        </Box>
+
+        <Box sx={{ position: 'absolute', top: '0%', height: '100%', width: '100%', zIndex: 1 }}>
+          {
+            <Box
+              mt={2}
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                transition: 'opacity 0.5s ease',
+                opacity: (() => (productActions ? 0 : 1))(),
+              }}
+            >
+              {product.isNew && (
+                <Typography
+                  variant="subtitle2"
+                  color={theme.palette.common.white}
+                  sx={{ bgcolor: theme.palette.grey[900], padding: '2px 12px' }}
+                >
+                  NEW
+                </Typography>
+              )}
+
+              {product.promotionPercent && (
+                <Typography
+                  variant="subtitle2"
+                  color={theme.palette.common.white}
+                  sx={{ bgcolor: SALE_PRICE_COLOR, padding: '2px 12px', ml: 'auto' }}
+                >
+                  {`-${product.promotionPercent}%`}
+                </Typography>
+              )}
+            </Box>
+          }
+          <Grow
+            in={productActions}
+            style={{ transformOrigin: '50% 100% 0' }}
+            {...(productActions ? { timeout: 500 } : {})}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '1%',
+                bottom: '5%',
+              }}
+            >
+              {productActions && (
+                <Box
+                  size="small"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Tooltip title="Quick View" placement="right">
+                    <Button
+                      sx={{
+                        mb: 1,
+                        bgcolor: theme.palette.common.white,
+                        color: theme.palette.common.black,
+                        '&:hover': {
+                          color: theme.palette.common.white,
+                          bgcolor: theme.palette.common.black,
+                        },
+                      }}
+                    >
+                      <RemoveRedEyeOutlinedIcon />
+                    </Button>
+                  </Tooltip>
+
+                  <Tooltip title="Like" placement="right">
+                    <Button
+                      sx={{
+                        mb: 1,
+                        bgcolor: theme.palette.common.white,
+                        color: theme.palette.common.black,
+                        '&:hover': {
+                          color: theme.palette.common.white,
+                          bgcolor: theme.palette.common.black,
+                        },
+                      }}
+                    >
+                      <FavoriteBorderOutlinedIcon />
+                    </Button>
+                  </Tooltip>
+
+                  <Tooltip title="Add to cart" placement="right">
+                    <Button
+                      sx={{
+                        mb: 1,
+                        bgcolor: theme.palette.common.white,
+                        color: theme.palette.common.black,
+                        '&:hover': {
+                          color: theme.palette.common.white,
+                          bgcolor: theme.palette.common.black,
+                        },
+                      }}
+                    >
+                      <ShoppingBasketOutlinedIcon />
+                    </Button>
+                  </Tooltip>
+                </Box>
+              )}
+            </Box>
+          </Grow>
+        </Box>
+      </Box>
+
+      <Box mt={1} sx={{ textAlign: 'center' }}>
         <Typography component="h4" variant="body2" fontWeight="500" color={AUTH_TEXT_COLOR}>
           {product.name}
         </Typography>
@@ -35,8 +192,8 @@ function Product({ product = {} }) {
           <Typography
             component="span"
             variant="body2"
-            sx={{ textDecoration: 'line-through' }}
             color={SALE_PRICE_COLOR}
+            sx={{ textDecoration: 'line-through' }}
           >
             {formatPrice(Number.parseFloat(product.originalPrice))}
           </Typography>
@@ -45,6 +202,5 @@ function Product({ product = {} }) {
     </Box>
   );
 }
-// sx={{ textAlign: 'center' }}
 
 export default Product;
