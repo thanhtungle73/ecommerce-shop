@@ -35,20 +35,23 @@ function Product({ product = {} }) {
 
   return (
     <Box
-      sx={{ cursor: 'pointer' }}
+      mb={4}
+      sx={{ cursor: 'pointer', borderRadius: '2px' }}
       onClick={handleProductClick}
       onMouseOver={handleProductMouseOver}
       onMouseLeave={handleProductMouseLeave}
     >
-      <Box sx={{ position: 'relative' }}>
+      <Box
+        sx={{
+          position: 'relative',
+          '&:hover img:nth-of-type(1)': { opacity: 0 },
+          '&:hover img:nth-of-type(2)': { opacity: 1 },
+        }}
+      >
         <Box
           sx={{
             position: 'relative',
-            float: 'left',
-            overflow: 'hidden',
             height: '100%',
-            '&:hover img:nth-child(1)': { opacity: 0 },
-            '&:hover img:nth-child(2)': { opacity: 1 },
           }}
         >
           <Box
@@ -57,8 +60,10 @@ function Product({ product = {} }) {
             width="100%"
             height="100%"
             sx={{
+              display: 'block',
               position: 'absolute',
-              zIndex: 2,
+              zIndex: 1,
+              borderRadius: '2px',
               transition: '0.4s',
             }}
           />
@@ -67,18 +72,18 @@ function Product({ product = {} }) {
             src={secondaryThumbnailUrl}
             width="100%"
             height="100%"
-            sx={{ transition: '0.4s' }}
+            sx={{ display: 'block', borderRadius: '2px', transition: '0.4s' }}
           />
         </Box>
 
-        <Box sx={{ position: 'absolute', top: '0%', height: '100%', width: '100%', zIndex: 1 }}>
+        <Box sx={{ position: 'absolute', top: '0%', height: '100%', width: '100%', zIndex: 2 }}>
           {
             <Box
               mt={2}
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                transition: 'opacity 0.5s ease',
+                transition: 'opacity 0.35s ease',
                 opacity: (() => (productActions ? 0 : 1))(),
               }}
             >
@@ -86,7 +91,11 @@ function Product({ product = {} }) {
                 <Typography
                   variant="subtitle2"
                   color={theme.palette.common.white}
-                  sx={{ bgcolor: theme.palette.grey[900], padding: '2px 12px' }}
+                  sx={{
+                    bgcolor: theme.palette.grey[900],
+                    padding: '2px 12px',
+                    borderRadius: '2px',
+                  }}
                 >
                   NEW
                 </Typography>
@@ -96,7 +105,12 @@ function Product({ product = {} }) {
                 <Typography
                   variant="subtitle2"
                   color={theme.palette.common.white}
-                  sx={{ bgcolor: SALE_PRICE_COLOR, padding: '2px 12px', ml: 'auto' }}
+                  sx={{
+                    bgcolor: SALE_PRICE_COLOR,
+                    padding: '2px 12px',
+                    ml: 'auto',
+                    borderRadius: '2px',
+                  }}
                 >
                   {`-${product.promotionPercent}%`}
                 </Typography>
@@ -179,7 +193,7 @@ function Product({ product = {} }) {
         </Box>
       </Box>
 
-      <Box mt={1} sx={{ textAlign: 'center' }}>
+      <Box mt={2} sx={{ textAlign: 'center' }}>
         <Typography component="h4" variant="body2" fontWeight="500" color={AUTH_TEXT_COLOR}>
           {product.name}
         </Typography>
@@ -189,14 +203,16 @@ function Product({ product = {} }) {
             {formatPrice(Number.parseFloat(product.salePrice))}
           </Typography>
 
-          <Typography
-            component="span"
-            variant="body2"
-            color={SALE_PRICE_COLOR}
-            sx={{ textDecoration: 'line-through' }}
-          >
-            {formatPrice(Number.parseFloat(product.originalPrice))}
-          </Typography>
+          {product.isPromotion && (
+            <Typography
+              component="span"
+              variant="body2"
+              color={SALE_PRICE_COLOR}
+              sx={{ textDecoration: 'line-through' }}
+            >
+              {formatPrice(Number.parseFloat(product.originalPrice))}
+            </Typography>
+          )}
         </Box>
       </Box>
     </Box>

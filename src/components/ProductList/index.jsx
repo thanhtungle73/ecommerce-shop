@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Container, Grid } from '@mui/material';
 import Product from 'components/Product';
-import { products } from '../../assets/fake-products';
 
-ProductList.propTypes = {};
+ProductList.propTypes = {
+  products: PropTypes.array,
+};
 
-function ProductList(props) {
+function ProductList({ products = [] }) {
   return (
     <Box mt={6}>
       <Container maxWidth="xl">

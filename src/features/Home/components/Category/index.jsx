@@ -40,28 +40,25 @@ function Category({ categories = [], loading = true }) {
             ))}
           </Grid>
         ) : (
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {categories.map((category, index) => (
               <Grid key={index} item xs={6} sm={6} lg={3}>
-                <Box
-                  sx={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    overflow: 'hidden',
-                    borderRadius: '4px',
-                    '&:hover img': {
-                      cursor: 'pointer',
-                      transform: 'scale(1.05)',
-                    },
-                  }}
-                >
-                  <Link to={category.path}>
+                <Link to={category.path} style={{ textDecoration: 'none' }}>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      width: '100%',
+                      height: '90%',
+                      overflow: 'hidden',
+                      borderRadius: '2px',
+                      '&:hover img': {
+                        cursor: 'pointer',
+                        transform: 'scale(1.05)',
+                      },
+                    }}
+                  >
                     <Box
                       sx={{
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        justifyContent: 'flex-start',
                         position: 'absolute',
                         width: '100%',
                         height: '100%',
@@ -72,20 +69,7 @@ function Category({ categories = [], loading = true }) {
                             'linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0))',
                         },
                       }}
-                    >
-                      <Box component="div" p={2}>
-                        <Typography
-                          variant="h5"
-                          mr="auto"
-                          fontWeight={500}
-                          textAlign="center"
-                          color={theme.palette.common.white}
-                          sx={{ textShadow: '0px 0px 1px #000' }}
-                        >
-                          {category.name}
-                        </Typography>
-                      </Box>
-                    </Box>
+                    ></Box>
 
                     <Box
                       component="img"
@@ -95,12 +79,24 @@ function Category({ categories = [], loading = true }) {
                         display: 'block',
                         width: '100%',
                         height: '100%',
-                        borderRadius: '4px',
+                        borderRadius: '2px',
                         transition: 'transform 0.5s ease',
                       }}
                     />
-                  </Link>
-                </Box>
+                  </Box>
+                  <Box component="div" p={2}>
+                    <Typography
+                      variant="body2"
+                      mr="auto"
+                      fontWeight={500}
+                      textAlign="center"
+                      color={theme.palette.text.primary}
+                      sx={{ textTransform: 'uppercase' }}
+                    >
+                      {category.name}
+                    </Typography>
+                  </Box>
+                </Link>
               </Grid>
             ))}
           </Grid>
